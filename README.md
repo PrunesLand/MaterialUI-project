@@ -1,4 +1,4 @@
-### Starter Project for the Material UI playlist
+# Starter Project for the Material UI playlist
 
 ## Project created by PrunesLand following The Net Ninja's Material UI Youtube tutorial
 
