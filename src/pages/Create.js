@@ -3,8 +3,11 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import AcUnitOutlinedIcon from '@material-ui/icons/AcUnitOutlined';
-import { makeStyles } from '@material-ui/core';
+import { FormControlLabel, makeStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import { FormControl, FormLabel } from '@material-ui/core';
 
 const useStyles = makeStyles({
   field: {
@@ -21,13 +24,15 @@ export default function Create() {
   const [details, setDetails] = useState('')
   const [titleError, setTitleError] = useState(false)
   const [detailsError, setDetailsError] = useState(false)
+  const [category, setCategory] = useState('')
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setTitleError(false)
     setDetailsError(false)
 
     if (title && details) {
-      console.log(title, details)
+      console.log(title, details, category)
     }
 
     if (title === '') {
@@ -77,9 +82,32 @@ export default function Create() {
           required
           error={detailsError}
         />
+
+        <FormControl className={classes.field}>
+          <FormLabel>Note Category</FormLabel>
+          <RadioGroup
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <FormControlLabel
+              value="money"
+              control={<Radio />}
+              label="Money" />
+
+            <FormControlLabel
+              value="work"
+              control={<Radio />}
+              label="work" />
+
+            <FormControlLabel
+              value="travel"
+              control={<Radio />}
+              label="travel" />
+
+          </RadioGroup>
+        </FormControl>
+
         <Button
-
-
           type="submit"
           color="secondary"
           variant="outlined"
