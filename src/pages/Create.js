@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import { FormControl, FormLabel } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   field: {
@@ -25,6 +26,7 @@ export default function Create() {
   const [titleError, setTitleError] = useState(false)
   const [detailsError, setDetailsError] = useState(false)
   const [category, setCategory] = useState('')
+  const history = useHistory()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -32,7 +34,11 @@ export default function Create() {
     setDetailsError(false)
 
     if (title && details) {
-      console.log(title, details, category)
+      fetch('http://localhost:8000/notes', {
+        method: 'POST',
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ title, details, category })
+      }).then(() => history.push('/'))
     }
 
     if (title === '') {
