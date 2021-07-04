@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { Container } from '@material-ui/core'
+import NoteCard from '../Components/NoteCard'
+
 export default function Notes() {
   const [notes, setNotes] = useState([]) // this stores the data from db.json
 
@@ -12,6 +14,10 @@ export default function Notes() {
       .then(res => res.json()) // this turns the fetched data into a json format. must be specified
       .then(data => setNotes(data)) // the created hook stores the fetched json data into the hook variable
   }, [])
+
+  const handleDelete = (id) => {
+    await fetch('http://localhost:8000/notes/' + id)
+  }
 
   return (
     <Container>
@@ -29,12 +35,12 @@ export default function Notes() {
           <Paper>4</Paper>
         </Grid>
       </Grid> */}
-      <Grid container>
+      <Grid container spacing={3}>
         {/* must specify the type of grid used. outer layer typically the container */}
         {/* Each of the items to be displayed must be specified as a grid */}
         {notes.map(note => (
           <Grid item key={note.id} xs={12} md={6} lg={4}>
-            <Paper>{note.title}</Paper>
+            <NoteCard note={note} />
           </Grid>
         ))}
       </Grid>
