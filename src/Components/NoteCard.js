@@ -5,13 +5,13 @@ import CardContent from '@material-ui/core/CardContent';
 import { IconButton, Typography } from '@material-ui/core';
 import { DeleteOutline } from '@material-ui/icons';
 
-function NoteCard({ note }) {
+function NoteCard({ note, handleDelete }) {
     return (
         <div>
             <Card elevation={3}>
                 <CardHeader
                     action={
-                        <IconButton onclick={() => console.log()} aria-label="settings">
+                        <IconButton onClick={() => handleDelete(note.id)} aria-label="settings">
                             <DeleteOutline />
                         </IconButton>
                     }

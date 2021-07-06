@@ -15,8 +15,14 @@ export default function Notes() {
       .then(data => setNotes(data)) // the created hook stores the fetched json data into the hook variable
   }, [])
 
-  const handleDelete = (id) => {
-    await fetch('http://localhost:8000/notes/' + id)
+  const handleDelete = async (id) => {
+    await fetch('http://localhost:8000/notes/' + id, {
+      method: 'DELETE'
+    })
+
+    const newNotes = notes.filter(note => note.id != id)
+    setNotes(newNotes)
+    console.log('Fucker deleted :}')
   }
 
   return (
@@ -40,7 +46,7 @@ export default function Notes() {
         {/* Each of the items to be displayed must be specified as a grid */}
         {notes.map(note => (
           <Grid item key={note.id} xs={12} md={6} lg={4}>
-            <NoteCard note={note} />
+            <NoteCard note={note} handleDelete={handleDelete} />
           </Grid>
         ))}
       </Grid>
