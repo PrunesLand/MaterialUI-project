@@ -6,7 +6,7 @@ import { IconButton, makeStyles, Typography } from '@material-ui/core';
 import { DeleteOutline } from '@material-ui/icons';
 
 const useStyles = makeStyles({
-    test: {
+    test: { // this will only apply when it meets the condition
         border: (note) => {
             if (note.category == 'work') {
                 return '1px solid red'
