@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { Container } from '@material-ui/core'
 import NoteCard from '../Components/NoteCard'
+import Masonry from 'react-masonry-css'
 
 export default function Notes() {
   const [notes, setNotes] = useState([]) // this stores the data from db.json
@@ -25,6 +26,12 @@ export default function Notes() {
     console.log('Fucker deleted :}')
   }
 
+  const breakpoints = {
+    default: 3,
+    1100: 2,
+    700: 1
+  }
+
   return (
     <Container>
       {/* <Grid container>
@@ -44,11 +51,21 @@ export default function Notes() {
       <Grid container spacing={3}>
         {/* must specify the type of grid used. outer layer typically the container */}
         {/* Each of the items to be displayed must be specified as a grid */}
-        {notes.map(note => (
-          <Grid item key={note.id} xs={12} md={6} lg={4}>
-            <NoteCard note={note} handleDelete={handleDelete} />
-          </Grid>
-        ))}
+        <Masonry
+          breakpointCols={breakpoints}
+          className='my-masonry-grid'
+          columnClassName='my-masonry-grid_column'
+        >
+          {notes.map(note => (
+            // <Grid item key={note.id} xs={12} md={6} lg={4}>
+            //   <NoteCard note={note} handleDelete={handleDelete} />
+            // </Grid>
+
+            <div key={note.id} xs={12} md={6} lg={4}>
+              <NoteCard note={note} handleDelete={handleDelete} />
+            </div>
+          ))}
+        </Masonry>
       </Grid>
     </Container>
   )
